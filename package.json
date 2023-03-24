@@ -21,6 +21,7 @@
 		"mongoose": "^7.0.3"
 	},
 	"devDependencies": {
+		"concurrently": "^7.6.0",
 		"nodemon": "^2.0.22"
 	}
 }

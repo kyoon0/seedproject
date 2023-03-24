@@ -1,0 +1,46 @@
+.auth-for-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+}
+.register-form > label,
+.register-form > button,
+p {
+	font-family: 'Poppins', sans-serif;
+}
+
+p > a {
+	text-decoration: none;
+	color: black;
+	font-weight: 500;
+}
+.register-form {
+	display: flex;
+	flex-direction: column;
+	width: 275px;
+}
+
+label {
+	text-align: left;
+	padding: 0.25rem 0;
+}
+
+input {
+	margin: 0.5rem 0;
+	padding: 0.75rem;
+	border-radius: 10px;
+}
+
+button {
+	border: none;
+	background-color: lightgray;
+	padding: 0.75rem;
+	margin-top: 0.5rem;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+button:hover {
+	transform: scale(0.98);
+}
