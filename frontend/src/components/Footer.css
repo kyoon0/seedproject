@@ -129,11 +129,12 @@
 .footer-logo {
 	display: flex;
 	align-items: center;
+	gap: 1rem;
 }
 
 .website-rights {
 	color: #ffff;
-	margin-right: 1060px;
+	/* margin-right: 1060px; */
 }
 
 @media screen and (max-width: 820px) {

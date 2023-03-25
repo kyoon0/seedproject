@@ -62,8 +62,9 @@ function Footer() {
 							<Link to="/" className="social-logo">
 								<i className="fa-solid fa-seedling"></i>
 							</Link>
+							<small className="website-rights">SEED © 2023</small>
 						</div>
-						<small className="website-rights">SEED © 2023</small>
+
 						<div className="social-icons">
 							<Link className="social-icon-link facebook" to="/" target="_blank" aria-label="Facebook">
 								<i className="fa-brands fa-facebook-f"></i>

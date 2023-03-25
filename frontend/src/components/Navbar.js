@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, reset } from '../features/auth/authSlice';
 
 function Navbar() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const { user } = useSelector((state) => state.auth);
+
 	const [click, setClick] = useState(false);
 	const [button, setButton] = useState(true);
 
 	const handleClick = () => setClick(!click);
 	const closeMobileMenu = () => setClick(false);
+	const onLogOut = () => {
+		dispatch(logout());
+		dispatch(reset());
+		setClick(false);
+		navigate('/');
+	};
 	const showButton = () => {
 		if (window.innerWidth <= 960) {
 			setButton(false);
@@ -37,18 +50,30 @@ function Navbar() {
 								Home
 							</Link>
 						</li>
-						<li className="nav-item">
-							<Link to="/sign-in" className="nav-links" onClick={closeMobileMenu}>
-								Login
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link to="/sign-up" className="nav-links-mobile" onClick={closeMobileMenu} target="_blank">
-								Get Seed
-							</Link>
-						</li>
+						{user ? (
+							<>
+								<li className="nav-item">
+									<Link to="/" className="nav-links" onClick={onLogOut}>
+										Logout
+									</Link>
+								</li>
+							</>
+						) : (
+							<>
+								<li className="nav-item">
+									<Link to="/sign-in" className="nav-links" onClick={closeMobileMenu}>
+										Login
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link to="/sign-up" className="nav-links-mobile" onClick={closeMobileMenu} target="_blank">
+										Get Seed
+									</Link>
+								</li>
+							</>
+						)}
 					</ul>
-					{button && <Button buttonStyle="btn--outline">Get Seed</Button>}
+					{user ? <></> : <>{button && <Button buttonStyle="btn--outline">Get Seed</Button>}</>}
 				</div>
 			</nav>
 		</>
