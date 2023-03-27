@@ -14,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// specify to use the url /api/goals for all routing
-app.use('/api/goals', require('./routes/goalRoutes'));
+// specify to use the url /api/chores for all routing
+app.use('/api/chores', require('./routes/choreRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 // error handling in errorMiddleware
