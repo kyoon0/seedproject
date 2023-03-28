@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import { create } from '../../../../backend/models/choreModel';
 import choresService from './choresService';
 
 // Get user from localStorage
@@ -12,11 +13,23 @@ const initialState = {
 	message: '',
 };
 
-// Create new chore
+// Create new chore. Passing choreData in async to send the chores.
 export const createChores = createAsyncThunk('chores/createChores', async (choreData, thunkAPI) => {
 	try {
 		const token = thunkAPI.getState().auth.user.token;
+		console.log(choreData);
 		return await choresService.createChores(choreData, token);
+	} catch (error) {
+		const message = (error.response && error.response.data && error.response.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
+
+// Get chores. Not passing in any data because we're not sending any data, only receiving
+export const getChores = createAsyncThunk('chores/getChores', async (_, thunkAPI) => {
+	try {
+		const token = thunkAPI.getState().auth.user.token;
+		return await choresService.getChores(token);
 	} catch (error) {
 		const message = (error.response && error.response.data && error.response.message) || error.message || error.toString();
 		return thunkAPI.rejectWithValue(message);
@@ -41,6 +54,19 @@ export const choresSlice = createSlice({
 				console.log(action);
 			})
 			.addCase(createChores.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(getChores.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getChores.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.chores = action.payload;
+			})
+			.addCase(getChores.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

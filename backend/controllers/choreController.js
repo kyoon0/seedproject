@@ -9,7 +9,6 @@ const User = require('../models/userModel');
 // @access Private
 const getChores = asyncHandler(async (req, res) => {
 	const chores = await Chore.find({ user: req.user.id });
-	console.log(req.user).blue;
 	console.log(chores);
 	res.status(200).json(chores);
 });

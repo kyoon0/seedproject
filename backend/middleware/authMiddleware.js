@@ -14,7 +14,7 @@ const protect = asyncHandler(async (req, res, next) => {
 
 			// Get user from the token
 			req.user = await User.findById(decoded.id).select('-password');
-			console.log(`this is from JWT passed via middleware: ${req.user}`.yellow);
+			// console.log(`this is from JWT passed via middleware: ${req.user}`.yellow);
 			next();
 		} catch (error) {
 			console.log(error);
