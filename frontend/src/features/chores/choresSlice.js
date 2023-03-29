@@ -36,6 +36,17 @@ export const getChores = createAsyncThunk('chores/getChores', async (_, thunkAPI
 	}
 });
 
+// Delete chores. Passing choreData in async to send the chores.
+export const deleteChores = createAsyncThunk('chores/deleteChores', async (id, thunkAPI) => {
+	try {
+		const token = thunkAPI.getState().auth.user.token;
+		return await choresService.deleteChores(id, token);
+	} catch (error) {
+		const message = (error.response && error.response.data && error.response.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
+
 export const choresSlice = createSlice({
 	name: 'chores',
 	initialState,
@@ -67,6 +78,19 @@ export const choresSlice = createSlice({
 				state.chores = action.payload;
 			})
 			.addCase(getChores.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(deleteChores.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteChores.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.chores = state.chores.filter((chore) => chore._id !== action.payload.id);
+			})
+			.addCase(deleteChores.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

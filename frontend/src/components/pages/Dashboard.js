@@ -14,7 +14,7 @@ function Dashboard() {
 	const { chores, isError, message } = useSelector((state) => state.chores);
 
 	// console.log(user);
-	console.log(chores);
+	// console.log(chores);
 
 	useEffect(() => {
 		if (isError) {

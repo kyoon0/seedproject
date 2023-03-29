@@ -11,6 +11,10 @@ const choreSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a text value'],
 		},
+		amount: {
+			type: Number,
+			required: true,
+		},
 	},
 	{
 		timestamps: true,

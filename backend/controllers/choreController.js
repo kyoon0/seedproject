@@ -25,6 +25,7 @@ const setChores = asyncHandler(async (req, res) => {
 	const chore = await Chore.create({
 		text: req.body.text,
 		user: req.user.id,
+		amount: req.body.amount,
 	});
 	res.status(200).json(chore);
 });
@@ -58,33 +59,47 @@ const updateChores = asyncHandler(async (req, res) => {
 	res.status(200).json(updatedChore);
 });
 
+const deleteChores = (req, res) => {
+	Chore.deleteOne({ _id: req.params.id }).then((data) => {
+		console.log(data);
+	});
+	res.status(200).json({ id: req.params.id });
+};
+
 // @desc Delete Chores
 // @route DELETE /api/chores/:id
 // @access Private
-const deleteChores = asyncHandler(async (req, res) => {
-	const chore = await Chore.findById(req.params.id);
-	if (!chore) {
-		res.status(400);
-		throw new Error('Chore not found');
-	}
+// const deleteChores = asyncHandler(async (req, res) => {
+// 	await Chore.deleteOne({ _id: req.params.id });
+// 	res.status(200).json({ _id: req.params.id });
+// });
+// const deleteChores = asyncHandler(async (req, res) => {
+// 	const chore = await Chore.findById(req.params.id);
+// 	if (!chore) {
+// 		res.status(400);
+// 		throw new Error('Chore not found');
+// 	}
 
-	const user = await User.findById(req.user.id);
+// 	const user = await User.findById(req.user.id);
 
-	// Chcek for user
-	if (!user) {
-		res.status(401);
-		throw new Error('User not found');
-	}
+// 	// Chcek for user
+// 	if (!user) {
+// 		res.status(401);
+// 		throw new Error('User not found');
+// 	}
 
-	// Make sure the logged in user matches the chore user
-	if (chore.user.toString() !== user.id) {
-		res.status(401);
-		throw new Error('User not authorized');
-	}
+// 	// Make sure the logged in user matches the chore user
+// 	if (chore.user.toString() !== user.id) {
+// 		res.status(401);
+// 		throw new Error('User not authorized');
+// 	}
 
-	await chore.remove();
-	res.status(200).json({ id: req.params.id });
-});
+// 	// const remove = await Chore.deleteOne({ id: req.params.id });
+// 	// console.log('deleted confirmed');
+// 	await chore.remove();
+
+// 	res.status(200).json({ id: req.params.id });
+// });
 
 module.exports = {
 	getChores,
