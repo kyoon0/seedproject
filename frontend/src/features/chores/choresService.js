@@ -11,7 +11,7 @@ const createChores = async (choreData, token) => {
 	};
 
 	const response = await axios.post(API_URL, choreData, config);
-	console.log(response.data);
+	// console.log(response.data);
 	// console.log(choreData);
 	return response.data;
 };

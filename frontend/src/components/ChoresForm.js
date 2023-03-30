@@ -1,18 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { create } from '../../../backend/models/choreModel';
 import { createChores } from '../features/chores/choresSlice';
 
 function ChoresForm() {
 	const dispatch = useDispatch();
-
-	// const [values, setValues] = useState({
-	// 	text: '',
-	// 	amount: '',
-	// });
-
-	// const { text, amount } = values;
 
 	const [text, setChore] = useState('');
 	const [amount, setAmount] = useState('');
@@ -23,25 +15,7 @@ function ChoresForm() {
 		setChore('');
 		setAmount('');
 	};
-	// const choresData = {
-	// 	text,
-	// 	amount,
-	// };
-	// dispatch(createChores(choresData));
-	// setValues({
-	// 	text: '',
-	// 	amount: '',
-	// });
-	// setChore('');
 
-	// const onChange = (e) => {
-	// 	const { name, value } = e.target;
-	// 	setValues((prevState) => ({
-	// 		...prevState,
-	// 		[name]: value,
-	// 	}));
-	// setChore(e.target.value);
-	// };
 	return (
 		<>
 			<section className="form">
@@ -64,3 +38,23 @@ function ChoresForm() {
 }
 
 export default ChoresForm;
+
+// const choresData = {
+// 	text,
+// 	amount,
+// };
+// dispatch(createChores(choresData));
+// setValues({
+// 	text: '',
+// 	amount: '',
+// });
+// setChore('');
+
+// const onChange = (e) => {
+// 	const { name, value } = e.target;
+// 	setValues((prevState) => ({
+// 		...prevState,
+// 		[name]: value,
+// 	}));
+// setChore(e.target.value);
+// };

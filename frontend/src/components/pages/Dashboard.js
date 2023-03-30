@@ -1,24 +1,37 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ChoresForm from '../ChoresForm';
 import { getChores, reset } from '../../features/chores/choresSlice';
 import ChoreItem from '../choreItem';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import _ from 'lodash';
+import './Dashboard.css';
 
 function Dashboard() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => state.auth);
-	const { chores, isError, message } = useSelector((state) => state.chores);
+	const { chores } = useSelector((state) => state.chores);
 
-	// console.log(user);
-	// console.log(chores);
+	function handleOnDragEnd(result) {
+		if (!result.destination) return;
+		const items = Array.from(chores);
+		const [reorderedItem] = items.splice(result.source.index, 1);
+		items.splice(result.destination.index, 0, reorderedItem);
+		console.log(items);
+		dispatch(getUpdatedChores(items));
+		// setState(items);
+	}
 
 	useEffect(() => {
-		if (isError) {
-			console.log(message);
+		// if (isError) {
+		// 	console.log(message);
+		// }
+		// setState(chores);
+		if (chores) {
 		}
 		if (!user) {
 			navigate('/sign-in');
@@ -28,11 +41,14 @@ function Dashboard() {
 		return () => {
 			dispatch(reset());
 		};
-	}, [user, navigate, isError, message, dispatch]);
-
-	const choreItem = chores.map((chore) => {
-		return <ChoreItem key={chore._id} choreItem={chore} />;
-	});
+	}, [user, navigate, dispatch]);
+	// isError, message,
+	// const choreItem function is created to be passed in return / render.
+	// chores is pulled from the database via useSelector
+	// choreItem in line 34 is the passed in argument in choreItem
+	// const choreItem = chores.map((chore) => {
+	// 	return <ChoreItem key={chore._id} choreItem={chore} />;
+	// });
 
 	return (
 		<>
@@ -41,9 +57,57 @@ function Dashboard() {
 				<p>Here is your dashboard</p>
 			</section>
 			<ChoresForm />
-			<section className="content">{chores.length > 0 ? <div className="chores">{choreItem}</div> : <div>No chores</div>}</section>
+			<DragDropContext onDragEnd={handleOnDragEnd}>
+				<Droppable droppableId="backlog">
+					{(provided) => (
+						<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
+							<div>
+								{chores.map((chore, index) => {
+									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+								})}
+							</div>
+							{provided.placeholder}
+						</ul>
+					)}
+				</Droppable>
+			</DragDropContext>
 		</>
 	);
 }
 
 export default Dashboard;
+
+/* <section className="content">{chores.length > 0 ? <div className="chores">{choreItem}</div> : <div>No chores</div>}</section> */
+
+/* <div className="dashboard">
+<DragDropContext onDragEnd={(e) => console.log(e)}>
+	{_.map(state, (data, key) => {
+		return (
+			<div className={'column'}>
+				<h3>{data.title}</h3>
+				<Droppable droppableId={key}>
+					{(provided, snapshot) => {
+						return (
+							<div className={'droppable-col'} ref={provided.innerRef} {...provided.droppableProps}>
+								{data.items.map((el, index) => {
+									return (
+										<Draggable key={el.id} index={index} draggableId={el.id}>
+											{(provided, snapshot) => {
+												console.log(snapshot);
+											}}
+											return(
+											<div className={`item ${snapshot.isDragging && 'dragging'}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+												{el.name}
+											</div>
+											)
+										</Draggable>
+									);
+								})}
+							</div>
+						);
+					}}
+				</Droppable>
+			</div>
+		);
+	})}
+</DragDropContext> */

@@ -17,7 +17,6 @@ const initialState = {
 export const createChores = createAsyncThunk('chores/createChores', async (choreData, thunkAPI) => {
 	try {
 		const token = thunkAPI.getState().auth.user.token;
-		console.log(choreData);
 		return await choresService.createChores(choreData, token);
 	} catch (error) {
 		const message = (error.response && error.response.data && error.response.message) || error.message || error.toString();
@@ -62,7 +61,6 @@ export const choresSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.chores.push(action.payload);
-				console.log(action);
 			})
 			.addCase(createChores.rejected, (state, action) => {
 				state.isLoading = false;
