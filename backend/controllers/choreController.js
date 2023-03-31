@@ -9,7 +9,6 @@ const User = require('../models/userModel');
 // @access Private
 const getChores = asyncHandler(async (req, res) => {
 	const chores = await Chore.find({ user: req.user.id });
-	console.log(chores);
 	res.status(200).json(chores);
 });
 
@@ -66,6 +65,41 @@ const deleteChores = (req, res) => {
 	res.status(200).json({ id: req.params.id });
 };
 
+// @desc Patch Updated Chores
+// @route PATCH /api/chores
+// @access Private
+const getUpdatedChores = asyncHandler(async (req, res) => {
+	const updatedChores = req.body;
+
+	// const bulkOps = [];
+	// updatedChores.map((id, number) => {
+	// 	const data = {
+	// 		updateO
+	// 	}
+	// })
+
+	res.status(200).json(updatedChores);
+
+	// const updatedChore = await Chore.collection.find().sort(); // 1 3 2
+	// console.log(Chore.getCollection('chores').find());
+	// console.log(Chore.getCollection('chores'));
+	// let updatedChores;
+	// // console.log(req.body[0]); // 1 2 3
+	// const chores = await Chore.find({ user: req.user.id });
+	// await Chores.sort((prev, next) => {
+	// 	return req.body.indexOf(prev) - req.body.indexOf(next);
+	// });
+	// console.log(chores);
+	// let updatedChores = await Chore.update(chores, req.body);
+
+	// const chore = await Chore.create({
+	// 	text: req.body.text,
+	// 	user: req.user.id,
+	// 	amount: req.body.amount,
+	// });
+	// res.status(200).json(chore);
+});
+
 // @desc Delete Chores
 // @route DELETE /api/chores/:id
 // @access Private
@@ -106,4 +140,5 @@ module.exports = {
 	setChores,
 	updateChores,
 	deleteChores,
+	getUpdatedChores,
 };

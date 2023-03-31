@@ -42,10 +42,28 @@ const deleteChores = async (id, token) => {
 	return response.data;
 };
 
+// Update chores
+
+// Update / Patch new chore
+const getUpdatedChores = async (choreData, token) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	// console.log(choreData);
+
+	const response = await axios.patch(API_URL, choreData, config);
+	console.log(response.data);
+	// console.log(choreData);
+	return response.data;
+};
+
 const choresService = {
 	createChores,
 	getChores,
 	deleteChores,
+	getUpdatedChores,
 };
 
 export default choresService;

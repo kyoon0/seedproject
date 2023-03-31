@@ -3,27 +3,27 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ChoresForm from '../ChoresForm';
-import { getChores, reset } from '../../features/chores/choresSlice';
+import { getUpdatedChores, getChores, reset } from '../../features/chores/choresSlice';
 import ChoreItem from '../choreItem';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import _ from 'lodash';
+import _ from 'lodash';
 import './Dashboard.css';
 
 function Dashboard() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
+	let state;
 	const { user } = useSelector((state) => state.auth);
 	const { chores } = useSelector((state) => state.chores);
+	const [test, setState] = useState(false);
 
 	function handleOnDragEnd(result) {
 		if (!result.destination) return;
 		const items = Array.from(chores);
 		const [reorderedItem] = items.splice(result.source.index, 1);
 		items.splice(result.destination.index, 0, reorderedItem);
-		console.log(items);
+		// console.log(items);
 		dispatch(getUpdatedChores(items));
-		// setState(items);
 	}
 
 	useEffect(() => {
@@ -42,6 +42,7 @@ function Dashboard() {
 			dispatch(reset());
 		};
 	}, [user, navigate, dispatch]);
+
 	// isError, message,
 	// const choreItem function is created to be passed in return / render.
 	// chores is pulled from the database via useSelector
@@ -61,6 +62,32 @@ function Dashboard() {
 				<Droppable droppableId="backlog">
 					{(provided) => (
 						<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
+							<div>
+								{chores.map((chore, index) => {
+									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+								})}
+							</div>
+							{provided.placeholder}
+						</ul>
+					)}
+				</Droppable>
+
+				<Droppable droppableId="inprogress">
+					{(provided) => (
+						<ul className="inprogress" {...provided.droppableProps} ref={provided.innerRef}>
+							<div>
+								{chores.map((chore, index) => {
+									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+								})}
+							</div>
+							{provided.placeholder}
+						</ul>
+					)}
+				</Droppable>
+
+				<Droppable droppableId="completed">
+					{(provided) => (
+						<ul className="completed" {...provided.droppableProps} ref={provided.innerRef}>
 							<div>
 								{chores.map((chore, index) => {
 									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
