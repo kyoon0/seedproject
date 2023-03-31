@@ -26,10 +26,6 @@ function Dashboard() {
 	}
 
 	useEffect(() => {
-		// if (isError) {
-		// 	console.log(message);
-		// }
-		// setState(chores);
 		if (chores) {
 		}
 		if (!user) {
@@ -41,14 +37,6 @@ function Dashboard() {
 			dispatch(reset());
 		};
 	}, [user, navigate, dispatch]);
-
-	// isError, message,
-	// const choreItem function is created to be passed in return / render.
-	// chores is pulled from the database via useSelector
-	// choreItem in line 34 is the passed in argument in choreItem
-	// const choreItem = chores.map((chore) => {
-	// 	return <ChoreItem key={chore._id} choreItem={chore} />;
-	// });
 
 	return (
 		<>
@@ -89,7 +77,7 @@ function Dashboard() {
 						<h3>In Progress</h3>
 						<Droppable droppableId="inprogress">
 							{(provided) => (
-								<ul className="inprogress" {...provided.droppableProps} ref={provided.innerRef}>
+								<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
 									<div className="column-items">
 										{chores.map((chore, index) => {
 											return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
@@ -158,3 +146,11 @@ export default Dashboard;
 		);
 	})}
 </DragDropContext> */
+
+// isError, message,
+// const choreItem function is created to be passed in return / render.
+// chores is pulled from the database via useSelector
+// choreItem in line 34 is the passed in argument in choreItem
+// const choreItem = chores.map((chore) => {
+// 	return <ChoreItem key={chore._id} choreItem={chore} />;
+// });
