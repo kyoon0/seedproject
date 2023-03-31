@@ -15,7 +15,6 @@ function Dashboard() {
 	let state;
 	const { user } = useSelector((state) => state.auth);
 	const { chores } = useSelector((state) => state.chores);
-	const [test, setState] = useState(false);
 
 	function handleOnDragEnd(result) {
 		if (!result.destination) return;
@@ -56,48 +55,69 @@ function Dashboard() {
 			<section className="heading">
 				<h2>Hello {user.name}! Welcome back.</h2>
 				<p>Here is your dashboard</p>
+				<p>Your balance is: $0</p>
+				<button className="request">Request Money</button>
 			</section>
+			<hr
+				style={{
+					color: 'lightgrey',
+					height: '0.5px',
+					width: '70%',
+					margin: '10px 10px 10px 72.5px',
+				}}
+			/>
 			<ChoresForm />
-			<DragDropContext onDragEnd={handleOnDragEnd}>
-				<Droppable droppableId="backlog">
-					{(provided) => (
-						<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
-							<div>
-								{chores.map((chore, index) => {
-									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
-								})}
-							</div>
-							{provided.placeholder}
-						</ul>
-					)}
-				</Droppable>
+			<div className="kanban">
+				<DragDropContext onDragEnd={handleOnDragEnd}>
+					<section className="one">
+						<h3>Back Log</h3>
+						<Droppable droppableId="backlog">
+							{(provided) => (
+								<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
+									<div className="column-items">
+										{chores.map((chore, index) => {
+											return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+										})}
+									</div>
+									{provided.placeholder}
+								</ul>
+							)}
+						</Droppable>
+					</section>
 
-				<Droppable droppableId="inprogress">
-					{(provided) => (
-						<ul className="inprogress" {...provided.droppableProps} ref={provided.innerRef}>
-							<div>
-								{chores.map((chore, index) => {
-									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
-								})}
-							</div>
-							{provided.placeholder}
-						</ul>
-					)}
-				</Droppable>
+					<section className="two">
+						<h3>In Progress</h3>
+						<Droppable droppableId="inprogress">
+							{(provided) => (
+								<ul className="inprogress" {...provided.droppableProps} ref={provided.innerRef}>
+									<div className="column-items">
+										{chores.map((chore, index) => {
+											return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+										})}
+									</div>
+									{provided.placeholder}
+								</ul>
+							)}
+						</Droppable>
+					</section>
 
-				<Droppable droppableId="completed">
-					{(provided) => (
-						<ul className="completed" {...provided.droppableProps} ref={provided.innerRef}>
-							<div>
-								{chores.map((chore, index) => {
-									return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
-								})}
-							</div>
-							{provided.placeholder}
-						</ul>
-					)}
-				</Droppable>
-			</DragDropContext>
+					<section className="three">
+						<h3>Completed</h3>
+						<Droppable droppableId="completed">
+							{(provided) => (
+								<ul className="completed" {...provided.droppableProps} ref={provided.innerRef}>
+									<div className="column-items">
+										{chores.map((chore, index) => {
+											return <ChoreItem id={chore._id} choreItem={chore} index={index} />;
+										})}
+									</div>
+									{provided.placeholder}
+								</ul>
+							)}
+						</Droppable>
+					</section>
+				</DragDropContext>
+			</div>
 		</>
 	);
 }

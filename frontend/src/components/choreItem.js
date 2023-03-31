@@ -11,13 +11,16 @@ function ChoreItem({ id, choreItem, index }) {
 		<>
 			<Draggable key={id} draggableId={id} index={index}>
 				{(provided) => (
-					<li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-						<div>{choreItem.text}</div>
-						<div>${choreItem.amount}</div>
-
-						<button onClick={() => dispatch(deleteChores(choreItem._id))} className="close">
-							X
-						</button>
+					<li className="item" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+						<div className="choreitem-container">
+							<div className="choreitem">
+								<div>{choreItem.text}</div>
+								<div>${choreItem.amount}</div>
+							</div>
+							<button onClick={() => dispatch(deleteChores(choreItem._id))} className="close-button">
+								X
+							</button>
+						</div>
 					</li>
 				)}
 			</Draggable>
