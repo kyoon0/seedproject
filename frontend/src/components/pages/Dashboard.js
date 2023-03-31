@@ -58,7 +58,7 @@ function Dashboard() {
 			<div className="kanban">
 				<DragDropContext onDragEnd={handleOnDragEnd}>
 					<section className="one">
-						<h3>Back Log</h3>
+						<h3>Backlog</h3>
 						<Droppable droppableId="backlog">
 							{(provided) => (
 								<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
@@ -75,7 +75,7 @@ function Dashboard() {
 
 					<section className="two">
 						<h3>In Progress</h3>
-						<Droppable droppableId="inprogress">
+						{/* <Droppable droppableId="inprogress">
 							{(provided) => (
 								<ul className="backlog" {...provided.droppableProps} ref={provided.innerRef}>
 									<div className="column-items">
@@ -86,12 +86,12 @@ function Dashboard() {
 									{provided.placeholder}
 								</ul>
 							)}
-						</Droppable>
+						</Droppable> */}
 					</section>
 
 					<section className="three">
 						<h3>Completed</h3>
-						<Droppable droppableId="completed">
+						{/* <Droppable droppableId="completed">
 							{(provided) => (
 								<ul className="completed" {...provided.droppableProps} ref={provided.innerRef}>
 									<div className="column-items">
@@ -102,7 +102,7 @@ function Dashboard() {
 									{provided.placeholder}
 								</ul>
 							)}
-						</Droppable>
+						</Droppable> */}
 					</section>
 				</DragDropContext>
 			</div>

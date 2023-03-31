@@ -5,6 +5,8 @@ import { deleteChores } from '../features/chores/choresSlice';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function ChoreItem({ id, choreItem, index }) {
+	console.log(index);
+
 	const dispatch = useDispatch();
 
 	return (

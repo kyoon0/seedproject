@@ -69,14 +69,23 @@ const deleteChores = (req, res) => {
 // @route PATCH /api/chores
 // @access Private
 const getUpdatedChores = asyncHandler(async (req, res) => {
-	const updatedChores = req.body;
+	// const chores = await Chore.find({ user: req.user.id });
+	// Chore.remove({});
+	// console.log(chores);
 
-	// const bulkOps = [];
-	// updatedChores.map((id, number) => {
-	// 	const data = {
-	// 		updateO
-	// 	}
-	// })
+	const updatedChores = req.body;
+	// // console.log(req.body[0]._id);
+	// const promises = updatedChores.map(async (chore, index) => {
+	// 	let orderkey = index + 1;
+	// 	const promise = Chore.updateOne({ _id: chore._id }, { $set: { updatedChores: orderkey } });
+	// 	console.log(promise);
+	// 	return promise;
+	// });
+
+	// const results = await Promise.all(promises);
+	// // console.log(results);
+	// // console.log(updatedChores);
+	// const chores = await Chore.find({ user: req.user.id });
 
 	res.status(200).json(updatedChores);
 
