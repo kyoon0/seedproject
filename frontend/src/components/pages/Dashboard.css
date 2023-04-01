@@ -32,10 +32,9 @@ ul {
 h3 {
 	font-size: 22px;
 	font-weight: bold;
-	margin-bottom: 8px;
 }
 
-.one,
+/* .one,
 .two,
 .three {
 	display: flex;
@@ -48,11 +47,11 @@ h3 {
 	width: 286px;
 	min-height: 120px;
 	flex-shrink: 0;
-}
+} */
 
-.choreitem-container {
+/* .choreitem-container {
 	display: flex;
-}
+} */
 
 .request {
 	background-color: #2883c1;
@@ -62,7 +61,7 @@ h3 {
 	border-radius: 4px;
 	border: none;
 
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 4px 22px 5px rgba(0, 0, 0, 0.11);
 	color: white;
 
 	font-weight: bold;
@@ -70,6 +69,17 @@ h3 {
 	cursor: pointer;
 }
 
-.item {
+/* .item {
 	margin: 5px;
+} */
+
+.strikethru {
+	text-decoration: line-through;
+}
+
+@media screen and (max-width: 760px) {
+	.choreItem {
+		position: relative;
+		left: 80px;
+	}
 }

@@ -1,12 +1,17 @@
 .choreItem {
 	display: flex;
-	gap: 5px;
+	gap: 15px;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	flex-wrap: wrap;
 }
 
 .item {
 	background: white;
 	color: black;
-	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.11);
+
 	padding: 18px;
 	border-radius: 4px;
 	font-size: 16px;
@@ -17,6 +22,19 @@
 .choreitem-container {
 	display: flex;
 	justify-content: space-between;
+	background: white;
+	color: black;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.11);
+
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-left: 18px;
+	padding-right: 10px;
+
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: move;
+	list-style-type: none;
 }
 ul {
 	list-style-type: none;
@@ -29,15 +47,60 @@ ul {
 	padding-left: 10px;
 }
 
+.right-side {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
 .close-button {
 	margin-right: 5px;
 	padding: 5px 10px;
 	border-radius: 4px;
 	border: none;
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.11);
 	background: lightgray;
 	color: black;
 	font-weight: bold;
 	font-size: 10px;
 	cursor: pointer;
+}
+
+.columns {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	background: #f4f4f4;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.11);
+	padding: 12px;
+	border-radius: 4px;
+	width: 286px;
+	min-height: 120px;
+	flex-shrink: 0;
+}
+
+.header {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+}
+
+.header > div {
+	/* font-size: 14px;
+	background-color: red;
+	height: 25px;
+	width: 25px;
+	position: relative;
+	display: inline-block; */
+	/* border-radius: 50%; */
+	font-size: 10px;
+	background-color: lightsalmon;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.11);
+
+	color: white;
+	text-decoration: none;
+	padding: 2.7px 8.7px;
+	position: relative;
+	display: inline-block;
+	border-radius: 100%;
 }
